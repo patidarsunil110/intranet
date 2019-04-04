@@ -1,5 +1,7 @@
 package com.idbiintech.intranet.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +24,16 @@ public class UserController {
 
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/signup")
 	public ModelAndView index(@ModelAttribute("welcome") UserDTO userDTO) {
 		int empList = userService.authentication(userDTO);
 		System.out.println(empList);
 		return new ModelAndView("home"); 
+	}
+	@PostMapping("/login")
+	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO) {
+		List<UserDTO> checkList=userService.loginUser(userDTO);
+		return new ModelAndView("home");
 	}
 
 }

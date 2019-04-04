@@ -77,7 +77,7 @@ body {
 
 	<div class="container">
 		<h2>Registration Form</h2>
-		<form class="form-inline" name="welcome" method="post" action="/login">
+		<form class="form-inline" name="welcome" method="post" action="/signup">
 			<div class="form-group">
 				<input type="text" class="form-control" id="empName"
 					placeholder="Enter Name" name="empName">

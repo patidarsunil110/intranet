@@ -1,5 +1,7 @@
 package com.idbiintech.intranet.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +37,12 @@ public class UserDao implements IUserDao {
 
 			return i;
 		}
+	}
+
+	@Override
+	public List<UserDTO> loginUser(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
