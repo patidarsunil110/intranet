@@ -1,6 +1,7 @@
 package com.idbiintech.intranet.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +19,35 @@ public class UserController {
 	@Autowired
 	IUserService userService;
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public ModelAndView index() {
-		return new ModelAndView("login");
+		return new ModelAndView("home");
+
+	}
+
+	@GetMapping("/signup")
+	public ModelAndView signup() {
+		return new ModelAndView("index");
 
 	}
 
 	@PostMapping("/signup")
 	public ModelAndView index(@ModelAttribute("welcome") UserDTO userDTO) {
-		int empList = userService.authentication(userDTO);
+		int empList = userService.saveEmployee(userDTO);
 		System.out.println(empList);
-		return new ModelAndView("home"); 
-	}
-	@PostMapping("/login")
-	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO) {
-		List<UserDTO> checkList=userService.loginUser(userDTO);
 		return new ModelAndView("home");
 	}
 
+	@PostMapping("/login")
+	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession httpSession,
+			HttpServletRequest request) {
+		boolean isValided = userService.loginUser(userDTO);
+		if (isValided) {
+			httpSession = request.getSession();
+			httpSession.setAttribute("username", userDTO.getEmailId());
+			return new ModelAndView("index");
+		} else {
+			return new ModelAndView("home");
+		}
+	}
 }

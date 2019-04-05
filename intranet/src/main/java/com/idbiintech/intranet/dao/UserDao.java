@@ -10,13 +10,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+
 import com.idbiintech.intranet.dao.IUserDao;
 import com.idbiintech.intranet.dto.UserDTO;
 
 @Repository
 public class UserDao implements IUserDao {
-	
-	Logger logger=LogManager.getLogger(UserDao.class);
+
+	private static final Logger logger = LogManager.getLogger(UserDao.class);
+	UserDTO userDTO;
 	@Autowired
 	DataSource dataSource;
 
@@ -26,7 +29,7 @@ public class UserDao implements IUserDao {
 	int i = 0;
 
 	@Override
-	public int authentication(UserDTO userDTO) {
+	public int saveEmployee(UserDTO userDTO) {
 		logger.info("Entering to authentication() in UserDAO Class :: ");
 		try {
 
@@ -45,20 +48,23 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public List<UserDTO> loginUser(UserDTO userDTO) {
+	public UserDTO validUser(String emailId) {
+		
 		logger.info("Entering to loginUser() in UserDAO Class :: ");
-			try {
+				try {
+
+			String sql = " select email,password from employees where email=?";
+			UserDTO lists = jdbcTemplate.queryForObject(sql, new Object[] {emailId},
+					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+			return lists;
+		} catch (Exception e) {
+			logger.error(e);
+
+		}
+				return null;
 				
-				String sql=" select emailId , password from employees where emailId=? ";
-						return jdbcTemplate.query(sql, new Object[] {userDTO.getEmailId()},
-								new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
-			}
-			catch (Exception e) {
-				logger.error(e);
-				
-			}
-			return null;
 		
 	}
 
+	
 }

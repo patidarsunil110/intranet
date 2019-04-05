@@ -91,17 +91,34 @@ body {
 
 			<div class="form-group">
 				<input type="text" class="form-control" id="emails"
-					placeholder="Enter Your Contact No" name="contact">
+					placeholder="Enter Your Contact No" name="mobile">
 			</div>
 
 			<div class="form-group">
 				<input type="email" class="form-control" id="emails"
-					placeholder="Enter Your Email" name="emailId">
+					placeholder="Enter manager name" name="manager">
 			</div>
 
 			<div class="form-group">
+				<input type="email" class="form-control" id="pwds"
+					placeholder="Enter  Your email" name="emailId">
+			</div>'
+			
+			<div class="form-group">
 				<input type="password" class="form-control" id="pwds"
 					placeholder="Enter  Your password" name="password">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="pwds"
+					placeholder="Enter  department" name="department">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="pwds"
+					placeholder="Enter  Your dob" name="dateOfJoining">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="pwds"
+					placeholder="Enter  Your email" name="designation">
 			</div>
 			<button type="submit" class="btn btn-default"
 				onclick="submit(this.form);">Submit</button>

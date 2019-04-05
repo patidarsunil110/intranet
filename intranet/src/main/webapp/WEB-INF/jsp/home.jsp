@@ -5,12 +5,75 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: skyblue;
+}
+
+.container {
+	width: 300px;
+	padding: 40;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #191919;
+	text-align: center;
+}
+
+.container h2 {
+	color: grey;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
+.container input[type="text"], .container input[type="password"],
+	.container input[type="email"] {
+	border: 0;
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.container input[type="text"]:focus, .container input[type="password"]:focus,
+	.container input[type="email"]:focus {
+	width: 280px;
+	border-color: #2ecc71;
+}
+
+.btn-default {
+	font-size:25px;
+	font-family:inherit;
+	border-color: white;
+}
+h1 {
+	color: green;
+	text-transform: inherit;
+	font-weight: 500;
+}
+</style>
+
 </head>
+
 <body>
-	Welcome ${emails} And ${pwds}
+	Welcome
+	<%=session.getAttribute("username")%>
 
 
 	<div class="container">
+	<marquee font color="blue"><h1>Welcome To Intranet Project</h1></marquee>
+	
 		<h2>Login Form</h2>
 		<form class="form-inline" name="auth" method="post" action="/login">
 			<div class="form-group">
@@ -22,8 +85,12 @@
 				<input type="text" class="form-control" id="password"
 					placeholder="Enter Password" name="password">
 			</div>
+			<div >
 			<button type="submit" class="btn btn-default"
 				onclick="submit(this.form);">Login</button>
+				
+					<a href="/signup" type="button">Signup</a>
+				</div>
 		</form>
 	</div>
 </body>
