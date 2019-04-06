@@ -1,6 +1,5 @@
 package com.idbiintech.intranet.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +19,14 @@ public class UserService implements IUserService {
 
 	@Override
 	public boolean loginUser(UserDTO userDTO) {
-		UserDTO validUser=userDao.validUser(userDTO.getEmailId());
-		if(validUser!=null) {
-			if((validUser.getPassword()).equals(userDTO.getPassword())) {
+		UserDTO validUser = userDao.validUser(userDTO.getEmail());
+		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))) {
+			/* && (validUser.getEmailId().equals(userDTO.getEmailId())) */ {
 				return true;
 			}
 		}
 		return false;
-				
+
 	}
 
 }

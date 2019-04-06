@@ -53,10 +53,11 @@ body {
 }
 
 .btn-default {
-	font-size:25px;
-	font-family:inherit;
+	font-size: 25px;
+	font-family: inherit;
 	border-color: white;
 }
+
 h1 {
 	color: green;
 	text-transform: inherit;
@@ -72,25 +73,25 @@ h1 {
 
 
 	<div class="container">
-	<marquee font color="blue"><h1>Welcome To Intranet Project</h1></marquee>
-	
+		<marquee font color="blue">
+			<h1>Welcome To Intranet Project</h1>
+		</marquee>
+
 		<h2>Login Form</h2>
 		<form class="form-inline" name="auth" method="post" action="/login">
 			<div class="form-group">
-				<input type="text" class="form-control" id="emailId"
-					placeholder="Enter Email" name="emailId">
+				<input type="text" class="form-control" id="email"
+					placeholder="Enter Email" name="email">
 			</div>
 
 			<div class="form-group">
 				<input type="text" class="form-control" id="password"
 					placeholder="Enter Password" name="password">
 			</div>
-			<div >
-			<button type="submit" class="btn btn-default"
-				onclick="submit(this.form);">Login</button>
-				
-					<a href="/signup" type="button">Signup</a>
-				</div>
+			<div>
+				<button type="submit" class="btn btn-default"
+					onclick="submit(this.form);">Login</button>
+			</div>
 		</form>
 	</div>
 </body>

@@ -28,6 +28,10 @@ body {
 	text-transform: inherit;
 	font-weight: 500;
 }
+.msg{
+color:red;
+text-align: center;
+}
 .class{
 font-size: 40px;
 font-family: inherit;
@@ -38,10 +42,11 @@ font-family: inherit;
 
 <marquee font color="blue"><h1>Welcome To Intranet Project</h1></marquee>
 
-<div class="container">
-<a class="class" href="/signup" type="button">Signup here</a>
-<a class="class" href="/login" type="button">Login here</a>
 
-</div>
+<h1 class="msg">This Page Is Under Contraction..!</h1>
+
+
+	
+
 </body>
 </html>

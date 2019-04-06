@@ -1,4 +1,4 @@
-function submit() {
+function submit(form) {
 
 	var emails = document.getElementById("emails").value;
 	var pwds = document.getElementById("pwds").value;
@@ -14,3 +14,9 @@ function submit() {
 	form.method="post";
 	form.submit(form);
 }
+$(document).ready(function() {
+	  $('#cars').on('change', function() {
+	    var $form = $(this).closest('form');
+	    $form.find('input[type=submit]').click();
+	  });
+	});

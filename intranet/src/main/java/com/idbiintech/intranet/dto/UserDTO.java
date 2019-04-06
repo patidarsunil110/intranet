@@ -8,7 +8,7 @@ public class UserDTO {
 	private String empLastName;
 	private String mobile;
 	private String manager;
-	private String emailId;
+	private String email;
 	private String password;
 	private String department;
 	private String dateOfJoining;
@@ -38,11 +38,11 @@ public class UserDTO {
 	public void setManager(String manager) {
 		this.manager = manager;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;

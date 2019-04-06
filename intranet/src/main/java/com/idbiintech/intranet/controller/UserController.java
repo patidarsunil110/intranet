@@ -21,16 +21,9 @@ public class UserController {
 
 	@GetMapping("/")
 	public ModelAndView index() {
-		return new ModelAndView("home");
-
-	}
-
-	@GetMapping("/signup")
-	public ModelAndView signup() {
 		return new ModelAndView("index");
 
 	}
-
 	@PostMapping("/signup")
 	public ModelAndView index(@ModelAttribute("welcome") UserDTO userDTO) {
 		int empList = userService.saveEmployee(userDTO);
@@ -44,8 +37,8 @@ public class UserController {
 		boolean isValided = userService.loginUser(userDTO);
 		if (isValided) {
 			httpSession = request.getSession();
-			httpSession.setAttribute("username", userDTO.getEmailId());
-			return new ModelAndView("index");
+			httpSession.setAttribute("username", userDTO.getEmpName()+" "+userDTO.getEmpLastName());
+			return new ModelAndView("welcome");
 		} else {
 			return new ModelAndView("home");
 		}
