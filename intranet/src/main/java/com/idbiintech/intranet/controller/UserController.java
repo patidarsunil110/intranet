@@ -36,11 +36,11 @@ public class UserController {
 	@PostMapping("/login")
 	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession httpSession,
 			HttpServletRequest request, Model model) {
-		boolean isValided = userService.loginUser(userDTO);
+		UserDTO isValided = userService.loginUser(userDTO);
 		try {
-			if (isValided) {
+			if (isValided!=null) {
 				httpSession = request.getSession();
-				httpSession.setAttribute("username", userDTO.getEmpName() + " " + userDTO.getEmpLastName());
+				httpSession.setAttribute("username", isValided.getEmpName() + " " + isValided.getEmpLastName());
 				return new ModelAndView("welcome");
 			} else {
 				model.addAttribute("msg", "Please enter valid email or password!");

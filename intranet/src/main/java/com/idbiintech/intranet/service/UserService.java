@@ -18,14 +18,14 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean loginUser(UserDTO userDTO) {
+	public UserDTO loginUser(UserDTO userDTO) {
 		UserDTO validUser = userDao.validUser(userDTO.getEmail());
 		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))
 				&& (validUser.getEmail().equals(userDTO.getEmail()))) {
-			return true;
+			return validUser;
 
 		} else {
-			return false;
+			return null;
 
 		}
 	}
