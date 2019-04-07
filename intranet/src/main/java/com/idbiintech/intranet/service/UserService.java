@@ -20,13 +20,13 @@ public class UserService implements IUserService {
 	@Override
 	public boolean loginUser(UserDTO userDTO) {
 		UserDTO validUser = userDao.validUser(userDTO.getEmail());
-		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))) {
-			/* && (validUser.getEmailId().equals(userDTO.getEmailId())) */ {
-				return true;
-			}
+		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))
+				&& (validUser.getEmail().equals(userDTO.getEmail()))) {
+			return true;
+
+		} else {
+			return false;
+
 		}
-		return false;
-
 	}
-
 }

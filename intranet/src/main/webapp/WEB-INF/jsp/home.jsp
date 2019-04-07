@@ -70,7 +70,7 @@ h1 {
 <body>
 	Welcome
 	<%=session.getAttribute("username")%>
-
+<div>${msg}</div>
 
 	<div class="container">
 		<marquee font color="blue">
