@@ -68,9 +68,11 @@ h1 {
 </head>
 
 <body>
-	Welcome
-	<%=session.getAttribute("username")%>
-<div>${msg}</div>
+	<c:if test="${not empty errorMsg }">
+<div class="text-center well well-lg">
+<h1><font color="red">${errorMsg}</font></h1>
+</div>
+</c:if>
 
 	<div class="container">
 		<marquee font color="blue">

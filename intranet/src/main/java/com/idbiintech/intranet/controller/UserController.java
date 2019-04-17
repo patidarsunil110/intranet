@@ -1,8 +1,13 @@
 package com.idbiintech.intranet.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,34 +21,50 @@ import com.idbiintech.intranet.service.IUserService;
 
 @Controller
 public class UserController {
-
+	private static final Logger logger = LogManager.getLogger(UserController.class);
 	@Autowired
 	IUserService userService;
 
 	@GetMapping("/")
 	public ModelAndView index() {
+		return new ModelAndView("home");
+
+	}
+
+	@GetMapping("/signup")
+	public ModelAndView signup() {
 		return new ModelAndView("index");
 
 	}
 
 	@PostMapping("/signup")
-	public ModelAndView index(@ModelAttribute("welcome") UserDTO userDTO) {
+	public ModelAndView signup(@ModelAttribute("welcome") UserDTO userDTO, Model model) {
 		int empList = userService.saveEmployee(userDTO);
-		System.out.println(empList);
-		return new ModelAndView("home");
+		if (empList > 0) {
+			model.addAttribute("msg", "User Added!!!!!!!!!!");
+			return new ModelAndView("index");
+		} else {
+			model.addAttribute("errorMsg", "User Not Added Please enter correct details!!!");
+			return new ModelAndView("index");
+
+		}
 	}
 
 	@PostMapping("/login")
-	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession httpSession,
-			HttpServletRequest request, Model model) {
+	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession session, HttpServletRequest request,
+			Model model) {
 		UserDTO isValided = userService.loginUser(userDTO);
 		try {
-			if (isValided!=null) {
-				httpSession = request.getSession();
-				httpSession.setAttribute("username", isValided.getEmpName() + " " + isValided.getEmpLastName());
+			if (isValided != null) {
+				session = request.getSession();
+				session.setAttribute("username", isValided.getEmpFirstName() + " " + isValided.getEmpLastName());
+				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
+				logger.info("Accessing List of all Employees :--- Stating ------>> ");
+				List<UserDTO> allEmployees = userService.getAllEmployees();
+				model.addAttribute("employees", allEmployees);
 				return new ModelAndView("welcome");
 			} else {
-				model.addAttribute("msg", "Please enter valid email or password!");
+				model.addAttribute("errorMsg", "Please enter valid email or password!");
 				return new ModelAndView("home");
 			}
 		} catch (Exception e) {

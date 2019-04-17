@@ -69,7 +69,22 @@ body {
 <title>Login</title>
 </head>
 <body>
-
+	<%-- <c:if test="${not empty msg }">
+		<div class="text-center well well-large" padding="right 50%">
+			<h1>
+				<font color="green">${msg}</font>
+			</h1>
+		</div>
+	</c:if> --%>
+	
+	<c:if test="${not empty errorMsg }">
+		<div class="text-center well well-large" padding="right 50%">
+			<h1>
+				<font color="red">${msg}</font>
+			</h1>
+		</div>
+	</c:if>
+	
 
 
 	<div class="container">
@@ -77,8 +92,8 @@ body {
 		<form id="form" class="form-inline" name="welcome" method="post"
 			action="/signup">
 			<div class="form-group">
-				<input type="text" class="form-control" id="empName"
-					placeholder="Enter Name" name="empName">
+				<input type="text" class="form-control" id="empFirstName"
+					placeholder="Enter Name" name="empFirstName">
 			</div>
 
 			<div class="form-group">
@@ -93,11 +108,6 @@ body {
 			</div>
 
 			<div class="form-group">
-				<input type="email" class="form-control" id="manager"
-					placeholder="Enter manager name" name="manager">
-			</div>
-
-			<div class="form-group">
 				<input type="email" class="form-control" id="email"
 					placeholder="Enter  Your email" name="email">
 			</div>
@@ -109,15 +119,19 @@ body {
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="department"
-					placeholder="Enter  department" name="department">
+					placeholder="Enter  department" name="departmentId">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" id="manager"
+					placeholder="Enter manager name" name="managerId">
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" id="dateOfJoining"
 					placeholder="Enter  Your dob" name="dateOfJoining">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="designation"
-					placeholder="Enter  Your email" name="designation">
+				<input type="text" class="form-control" id="roleId"
+					placeholder="Enter  Your Role" name="roleId">
 			</div>
 			<button type="submit" class="btn btn-default" onclick="myFunction()">Submit</button>
 		</form>

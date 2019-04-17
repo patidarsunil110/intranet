@@ -1,5 +1,6 @@
 package com.idbiintech.intranet.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -32,15 +33,13 @@ public class UserDao implements IUserDao {
 		logger.info("Entering to authentication() in UserDAO Class :: ");
 		try {
 
-			String sqls = "insert into employees(empname,emplastname,mobile,manager,email,password,department,"
-					+ "dateofjoining,designation) values (?,?,?,?,?,?,?,?,?)";
+			String sqls = "insert into employees(emp_firstname,emp_lastname,mobile,email,password,department_id,manager_id,dateofjoining,role_id) values (?,?,?,?,?,?,?,?,?)";
 			i = jdbcTemplate.update(sqls,
-					new Object[] { userDTO.getEmpName(), userDTO.getEmpLastName(), userDTO.getMobile(),
-							userDTO.getManager(), userDTO.getEmail(), userDTO.getPassword(), userDTO.getDepartment(),
-							userDTO.getDateOfJoining(), userDTO.getDesignation() });
+					new Object[] { userDTO.getEmpFirstName(), userDTO.getEmpLastName(), userDTO.getMobile(),
+							userDTO.getEmail(), userDTO.getPassword(), userDTO.getDepartmentId(),
+							userDTO.getManagerId(), userDTO.getDateOfJoining(), userDTO.getRoleId() });
 			return i;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			logger.error(e);
 			return i;
 		}
@@ -52,7 +51,7 @@ public class UserDao implements IUserDao {
 		logger.info("Entering to loginUser() in UserDAO Class :: ");
 		try {
 
-			String sql = " select * from employees where email=?";
+			String sql = " select emp_firstname as empFirstName,emp_lastname as empLastName,email,password from employees where email=?";
 			lists = jdbcTemplate.query(sql, new Object[] { email }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			logger.error(e);
@@ -62,6 +61,19 @@ public class UserDao implements IUserDao {
 		} else {
 			return lists.get(0);
 		}
+	}
+
+	@Override
+	public ArrayList<UserDTO> getAllEmployees() {
+		ArrayList<UserDTO> userList = null;
+		try {
+			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,email,password,department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees";
+			userList = (ArrayList<UserDTO>) jdbcTemplate.query(sql, new Object[] {},
+					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return userList;
 	}
 
 }

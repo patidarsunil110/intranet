@@ -1,5 +1,8 @@
 package com.idbiintech.intranet.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +31,11 @@ public class UserService implements IUserService {
 			return null;
 
 		}
+	}
+
+	@Override
+	public List<UserDTO> getAllEmployees() {
+
+		return userDao.getAllEmployees();
 	}
 }

@@ -4,21 +4,28 @@ import lombok.Data;
 
 @Data
 public class UserDTO {
-	private String empName;
+	private int empId;
+	private String empFirstName;
 	private String empLastName;
 	private String mobile;
-	private String manager;
 	private String email;
 	private String password;
-	private String department;
+	private String departmentId;
+	private String managerId;
 	private String dateOfJoining;
-	private String designation;
+	private String roleId;
 	
-	public String getEmpName() {
-		return empName;
+	public int getEmpId() {
+		return empId;
 	}
-	public void setEmpName(String empName) {
-		this.empName = empName;
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+	public String getEmpFirstName() {
+		return empFirstName;
+	}
+	public void setEmpFirstName(String empFirstName) {
+		this.empFirstName = empFirstName;
 	}
 	public String getEmpLastName() {
 		return empLastName;
@@ -32,12 +39,6 @@ public class UserDTO {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public String getManager() {
-		return manager;
-	}
-	public void setManager(String manager) {
-		this.manager = manager;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -50,11 +51,17 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getDepartment() {
-		return department;
+	public String getDepartmentId() {
+		return departmentId;
 	}
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+	public String getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
 	public String getDateOfJoining() {
 		return dateOfJoining;
@@ -62,11 +69,11 @@ public class UserDTO {
 	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
-	public String getDesignation() {
-		return designation;
+	public String getRoleId() {
+		return roleId;
 	}
-	public void setDesignation(String designation) {
-		this.designation = designation;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	
