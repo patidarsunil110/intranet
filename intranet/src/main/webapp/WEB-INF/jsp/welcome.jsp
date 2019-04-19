@@ -178,7 +178,7 @@ h1 {
 			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 				class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="Home">Adventure</a>
+		<a class="navbar-brand" href="Home">i-HRMS</a>
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav">
@@ -190,20 +190,6 @@ h1 {
 					class="glyphicon glyphicon-envelope"></span> Queries</a></li>
 			<li><a href="AdminNotification"><span
 					class="glyphicon glyphicon-bell"></span> Notification</a></li>
-			<!-- <li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Destination <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Shimla</a></li>
-						<li><a href="#">Kullu</a></li>
-						<li><a href="#">Manali</a></li>
-						<li><a href="#">Dharmshala</a></li>
-						<li><a href="#">Chamba</a></li>
-						<li><a href="#">Dalhousie</a></li>
-						<li><a href="#">Kangra</a></li>
-						<li><a href="#">Kasauli</a></li>
-						<li><a href="#">Hamirpur</a></li>
-						<li><a href="#">Parwanoo</a></li>
-					</ul></li> -->
 
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
@@ -223,9 +209,9 @@ h1 {
 	<div class="container">
 		<div class="form">
 			<form action="search" method="GET">
-				<h3>
+				<h5>
 					<input type="text" name="searchParam">
-				</h3>
+				</h5>
 				<h4>
 					<input type="submit" value="Search">
 				</h4>
@@ -263,8 +249,12 @@ h1 {
 							<td>${user.managerId}</td>
 							<td>${user.dateOfJoining}</td>
 							<td>${user.roleId}</td>
-							<td><a href="updateUser?id=${user.empId}">Update</a></td>
-							<td><a href="deleteUser?id=${user.empId}">Delete</a></td>
+							<td><form action="get" modelAttribute="updateEmployee ">
+									<a href="updateUser?empId=${user.empId}">Update</a>
+								</form></td>
+							<td><form action="get" modelAttribute="deleteUser ">
+									<a href="deleteUser?empId=${user.empId}">Delete</a>
+								</form></td>
 						</tr>
 					</c:forEach>
 

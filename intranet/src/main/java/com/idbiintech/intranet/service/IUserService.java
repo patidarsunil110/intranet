@@ -12,4 +12,12 @@ public interface IUserService {
 
 	public List<UserDTO> getAllEmployees();
 
+	public List<UserDTO> getUserById(String searchParam);
+
+	public int updateEmployee(UserDTO userDTO);
+
+	public List<UserDTO> getUserByIdForUpdate(int empId);
+
+	public int deleteUser(int i);
+
 }

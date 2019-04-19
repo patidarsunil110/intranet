@@ -38,4 +38,24 @@ public class UserService implements IUserService {
 
 		return userDao.getAllEmployees();
 	}
+
+	@Override
+	public List<UserDTO> getUserById(String searchParam) {
+		return userDao.getUserById(searchParam);
+	}
+
+	@Override
+	public int updateEmployee(UserDTO userDTO) {
+		return userDao.updateEmployee(userDTO);
+	}
+
+	@Override
+	public List<UserDTO> getUserByIdForUpdate(int empId) {
+		return userDao.getUserByIdForUpdate(empId);
+	}
+
+	@Override
+	public int deleteUser(int i) {
+		return userDao.deleteUser(i);
+	}
 }

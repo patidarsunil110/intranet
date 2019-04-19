@@ -1,6 +1,5 @@
 package com.idbiintech.intranet.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.idbiintech.intranet.dto.UserDTO;
@@ -71,5 +71,50 @@ public class UserController {
 			System.out.println("Controller issue !!!!!!!!!!!!!!!!" + e);
 			return new ModelAndView("home");
 		}
+	}
+
+	@GetMapping("/search")
+	public ModelAndView search(@ModelAttribute("searchParam") String searchParam, Model model) {
+		logger.info("Accessing List By Serach Parameters:-- ");
+		List<UserDTO> list = userService.getUserById(searchParam);
+		model.addAttribute("employees", list);
+		return new ModelAndView("welcome");
+
+	}
+
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		logger.info("Logout user");
+		session.invalidate();
+		return new ModelAndView("home");
+	}
+
+	@GetMapping("/updateUser")
+	public ModelAndView updateEmployee(
+			/* @RequestParam("empId") int empId, */@ModelAttribute("updateEmployee") UserDTO userDTO, Model model) {
+		List<UserDTO> list = userService.getUserByIdForUpdate(userDTO.getEmpId());
+		UserDTO users = list.get(0);
+		model.addAttribute("user", users);
+		return new ModelAndView("updatedetails");
+	}
+
+	@PostMapping("/updateUser")
+	public ModelAndView updateUser(@ModelAttribute("update") UserDTO userDTO, Model model) {
+		logger.info("update users");
+
+		int list = userService.updateEmployee(userDTO);
+		List<UserDTO> allEmployees = userService.getAllEmployees();
+		model.addAttribute("employees", allEmployees);
+		return new ModelAndView("welcome");
+	}
+	
+	@GetMapping("/deleteUser")
+	public ModelAndView deleteUser(@ModelAttribute("deleteUser") UserDTO userDTO, Model model)
+	{
+		int delete=userService.deleteUser(userDTO.getEmpId());
+		List<UserDTO> allEmployees = userService.getAllEmployees();
+		model.addAttribute("employees", allEmployees);
+		return new ModelAndView("welcome");
+		
 	}
 }

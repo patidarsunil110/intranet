@@ -26,7 +26,7 @@ public class UserDao implements IUserDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	int i = 0;
+	static int i = 0;
 
 	@Override
 	public int saveEmployee(UserDTO userDTO) {
@@ -67,7 +67,8 @@ public class UserDao implements IUserDao {
 	public ArrayList<UserDTO> getAllEmployees() {
 		ArrayList<UserDTO> userList = null;
 		try {
-			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,email,password,department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees";
+			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
+					+ "department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees";
 			userList = (ArrayList<UserDTO>) jdbcTemplate.query(sql, new Object[] {},
 					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
@@ -76,4 +77,67 @@ public class UserDao implements IUserDao {
 		return userList;
 	}
 
+	@Override
+	public List<UserDTO> getUserById(String searchParam) {
+		searchParam = "%" + searchParam + "%";
+		List<UserDTO> list = null;
+		try {
+			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
+					+ "department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees where emp_id like (?) "
+					+ "or emp_firstname like (?) or emp_lastname like(?) or mobile like (?) or email like (?) or department_id like(?)"
+					+ " or manager_id like(?)";
+			list = jdbcTemplate.query(sql, new Object[] { searchParam, searchParam, searchParam, searchParam,
+					searchParam, searchParam, searchParam }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return list;
+	}
+
+	@Override
+	public int updateEmployee(UserDTO userDTO) {
+		logger.info("Accessing of UpdateEmployee Method:-- ");
+		try {
+			String sql = "update employees set emp_firstname =?, emp_lastname=?,mobile=?, email=?,department_id=?,manager_id=?,dateofjoining=?,role_id=? where emp_id =?";
+			i = jdbcTemplate.update(sql,
+					new Object[] { userDTO.getEmpFirstName(), userDTO.getEmpLastName(), userDTO.getMobile(),
+							userDTO.getEmail(), userDTO.getDepartmentId(), userDTO.getManagerId(),
+							userDTO.getDateOfJoining(), userDTO.getRoleId(), userDTO.getEmpId() });
+			return i;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		return i;
+	}
+
+	@Override
+	public List<UserDTO> getUserByIdForUpdate(int empId) {
+		List<UserDTO> lists = null;
+		try {
+			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
+					+ "department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees where emp_id = ?";
+			lists = jdbcTemplate.query(sql, new Object[] { empId }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		if (CollectionUtils.isEmpty(lists)) {
+			return null;
+		} else {
+			return lists;
+		}
+	}
+
+	@Override
+	public int deleteUser(int empId) {
+		try {
+			String sql = "delete from employees where emp_id=?";
+			i = jdbcTemplate.update(sql, new Object[] { empId });
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		return i;
+	}
 }
