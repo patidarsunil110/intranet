@@ -67,8 +67,9 @@ public class UserDao implements IUserDao {
 	public ArrayList<UserDTO> getAllEmployees() {
 		ArrayList<UserDTO> userList = null;
 		try {
-			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
-					+ "department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees";
+			String sql = "select employees.emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
+					+ "department.department_name as departmentName , manager.manager_name as managerName ,dateofjoining,role.role_name as roleName from employees,department,manager,role "
+					+ "where employees.manager_id =manager.manager_id and employees.department_id=department.department_id and employees.role_id=role.role_id";
 			userList = (ArrayList<UserDTO>) jdbcTemplate.query(sql, new Object[] {},
 					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
@@ -83,11 +84,11 @@ public class UserDao implements IUserDao {
 		List<UserDTO> list = null;
 		try {
 			String sql = "select emp_id as empId , emp_firstname as empFirstName,emp_lastname as empLastName,mobile,email,password,"
-					+ "department_id as departmentId , manager_id as managerId ,dateofjoining,role_id as roleId from employees where emp_id like (?) "
-					+ "or emp_firstname like (?) or emp_lastname like(?) or mobile like (?) or email like (?) or department_id like(?)"
-					+ " or manager_id like(?)";
+					+ "department.department_name as departmentName , manager.manager_name as managerName ,dateofjoining,role.role_name as roleName from employees e,department,manager,role where emp_id like (?) "
+					+ "or emp_firstname like (?) or emp_lastname like(?) or mobile like (?) or email like (?) or department.department_name like(?)"
+					+ " or manager.manager_name like(?) or role.role_name like (?)";
 			list = jdbcTemplate.query(sql, new Object[] { searchParam, searchParam, searchParam, searchParam,
-					searchParam, searchParam, searchParam }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+					searchParam, searchParam, searchParam ,searchParam}, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			logger.error(e);
 		}

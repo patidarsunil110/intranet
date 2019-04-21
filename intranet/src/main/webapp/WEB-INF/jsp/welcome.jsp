@@ -222,7 +222,7 @@ h1 {
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th>EmpId</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Mobile</th>
@@ -245,10 +245,10 @@ h1 {
 							<td>${user.mobile}</td>
 							<td>${user.email}</td>
 							<td>${user.password}</td>
-							<td>${user.departmentId}</td>
-							<td>${user.managerId}</td>
+							<td>${user.departmentName}</td>
+							<td>${user.managerName}</td>
 							<td>${user.dateOfJoining}</td>
-							<td>${user.roleId}</td>
+							<td>${user.roleName}</td>
 							<td><form action="get" modelAttribute="updateEmployee ">
 									<a href="updateUser?empId=${user.empId}">Update</a>
 								</form></td>
