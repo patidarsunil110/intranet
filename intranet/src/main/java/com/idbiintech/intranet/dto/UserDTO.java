@@ -17,6 +17,20 @@ public class UserDTO {
 	private String dateOfJoining;
 	private String roleId;
 	private String roleName;
+	private int attendanceId;
+	private String dayName;
+	private String dayDate;
+	private String checkIn;
+	private String checkOut;
+	private String status;
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public int getEmpId() {
 		return empId;
@@ -120,6 +134,46 @@ public class UserDTO {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public int getAttendanceId() {
+		return attendanceId;
+	}
+
+	public void setAttendanceId(int attendanceId) {
+		this.attendanceId = attendanceId;
+	}
+
+	public String getDayName() {
+		return dayName;
+	}
+
+	public void setDayName(String dayName) {
+		this.dayName = dayName;
+	}
+
+	public String getDayDate() {
+		return dayDate;
+	}
+
+	public void setDayDate(String dayDate) {
+		this.dayDate = dayDate;
+	}
+
+	public String getCheckIn() {
+		return checkIn;
+	}
+
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	public String getCheckOut() {
+		return checkOut;
+	}
+
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
 	}
 	
 

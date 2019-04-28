@@ -190,7 +190,15 @@ h1 {
 					class="glyphicon glyphicon-envelope"></span> Queries</a></li>
 			<li><a href="AdminNotification"><span
 					class="glyphicon glyphicon-bell"></span> Notification</a></li>
-
+			<li><a href="/home">Home</a></li>
+			<li><a href="/leavebal">My Leave Balance</a></li>
+			<li><a href="/leaveapply">Apply Leave</a></li>
+			<li><a href="/attendance">Attendance</a></li>
+			<li><a href="/payslips">Individual Payslip</a></li>
+			<li><a href="/tax">Tax Estimate</a></li>
+			<li><a href="/vehicle">Vehicle Reimbursement</a></li>
+			<li><a href="/mobile">Mobile Reimbursement</a></li>
+			<li><a href="/addEmployee">Add Employees</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#"><span class="glyphicon glyphicon-log-in "></span>

@@ -1,6 +1,5 @@
 package com.idbiintech.intranet.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +56,17 @@ public class UserService implements IUserService {
 	@Override
 	public int deleteUser(int i) {
 		return userDao.deleteUser(i);
+	}
+
+	@Override
+	public UserDTO getUserByAttendance(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return userDao.getUserByAttendance(userDTO);
+	}
+
+	@Override
+	public List<UserDTO> getUserByAttendance() {
+		// TODO Auto-generated method stub
+		return userDao.getUserByAttendance();
 	}
 }

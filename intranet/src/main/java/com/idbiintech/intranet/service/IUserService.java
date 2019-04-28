@@ -20,4 +20,8 @@ public interface IUserService {
 
 	public int deleteUser(int i);
 
+	public UserDTO getUserByAttendance(UserDTO userDTO);
+
+	public List<UserDTO> getUserByAttendance();
+
 }

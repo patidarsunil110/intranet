@@ -21,4 +21,8 @@ public interface IUserDao {
 
 	public int deleteUser(int i);
 
+	public UserDTO getUserByAttendance(UserDTO userDTO);
+
+	public List<UserDTO> getUserByAttendance();
+
 }

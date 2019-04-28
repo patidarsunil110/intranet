@@ -51,7 +51,7 @@ public class UserDao implements IUserDao {
 		logger.info("Entering to loginUser() in UserDAO Class :: ");
 		try {
 
-			String sql = " select emp_firstname as empFirstName,emp_lastname as empLastName,email,password from employees where email=?";
+			String sql = " select emp_id as empId, emp_firstname as empFirstName,emp_lastname as empLastName,email,password from employees where email=?";
 			lists = jdbcTemplate.query(sql, new Object[] { email }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			logger.error(e);
@@ -88,7 +88,8 @@ public class UserDao implements IUserDao {
 					+ "or emp_firstname like (?) or emp_lastname like(?) or mobile like (?) or email like (?) or department.department_name like(?)"
 					+ " or manager.manager_name like(?) or role.role_name like (?)";
 			list = jdbcTemplate.query(sql, new Object[] { searchParam, searchParam, searchParam, searchParam,
-					searchParam, searchParam, searchParam ,searchParam}, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+					searchParam, searchParam, searchParam, searchParam },
+					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -140,5 +141,39 @@ public class UserDao implements IUserDao {
 			logger.error(e);
 		}
 		return i;
+	}
+
+	@Override
+	public UserDTO getUserByAttendance(UserDTO userDTO) {
+		List<UserDTO> lists = null;
+
+		try {
+			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from attendance";
+			lists = jdbcTemplate.query(sql,
+					new Object[] { },
+					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(" Attendance list issue " + e);
+		}
+		if (CollectionUtils.isEmpty(lists)) {
+			return null;
+		} else {
+			return lists.get(0);
+		}
+	}
+
+	@Override
+	public List<UserDTO> getUserByAttendance() {
+		List<UserDTO> listss=null;
+		try {
+			String sql="select * from attendance";
+			listss=jdbcTemplate.query(sql, new Object[] {},new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Error Exception "+e);
+		}
+		
+		return listss;
 	}
 }

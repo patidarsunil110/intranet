@@ -22,22 +22,91 @@ import com.idbiintech.intranet.service.IUserService;
 @Controller
 public class UserController {
 	private static final Logger logger = LogManager.getLogger(UserController.class);
+
 	@Autowired
 	IUserService userService;
 
+	UserDTO isValided = null;
+
 	@GetMapping("/")
 	public ModelAndView index() {
-		return new ModelAndView("home");
+		return new ModelAndView("Login");
 
 	}
 
-	@GetMapping("/signup")
+	@GetMapping("/home")
+	public ModelAndView home() {
+		return new ModelAndView("Home");
+
+	}
+
+	@GetMapping("/leavebal")
+	public ModelAndView leavebalance() {
+		return new ModelAndView("Myleave");
+
+	}
+
+	@GetMapping("/leaveapply")
+	public ModelAndView leaveapply() {
+		return new ModelAndView("ApplyLeave");
+
+	}
+
+	@GetMapping("/attendance")
+	public ModelAndView attendance(@ModelAttribute("attendance") UserDTO userDTO, HttpSession session,
+			HttpServletRequest request, Model model) {
+
+		UserDTO list = userService.getUserByAttendance(userDTO);     //
+		session = request.getSession();
+		try {
+			if (list.getEmpId() == isValided.getEmpId()) {
+				List<UserDTO> attendanceList = userService.getUserByAttendance();
+				model.addAttribute("attendance", attendanceList);
+				return new ModelAndView("Attendance"); 
+			}else {
+				return new ModelAndView("Home");
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			logger.error("Attendance issue " + e);
+			return new ModelAndView("Home");
+		}
+		
+	}
+
+	@GetMapping("/payslips")
+	public ModelAndView payslips() {
+		return new ModelAndView("Payslip");
+
+	}
+
+	@GetMapping("/tax")
+	public ModelAndView tax() {
+		return new ModelAndView("Tax");
+
+	}
+
+	@GetMapping("/vehicle")
+	public ModelAndView vehicle() {
+		return new ModelAndView("Vehicle");
+
+	}
+
+	@GetMapping("/mobile")
+	public ModelAndView mobile() {
+		return new ModelAndView("Mobile");
+
+	}
+
+	@GetMapping("/addEmployee")
 	public ModelAndView signup() {
 		return new ModelAndView("index");
 
 	}
 
-	@PostMapping("/signup")
+	@PostMapping("/addEmployee")
 	public ModelAndView signup(@ModelAttribute("welcome") UserDTO userDTO, Model model) {
 		int empList = userService.saveEmployee(userDTO);
 		if (empList > 0) {
@@ -53,23 +122,26 @@ public class UserController {
 	@PostMapping("/login")
 	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession session, HttpServletRequest request,
 			Model model) {
-		UserDTO isValided = userService.loginUser(userDTO);
+		isValided = userService.loginUser(userDTO);
 		try {
 			if (isValided != null) {
 				session = request.getSession();
 				session.setAttribute("username", isValided.getEmpFirstName() + " " + isValided.getEmpLastName());
 				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
-				logger.info("Accessing List of all Employees :--- Stating ------>> ");
-				List<UserDTO> allEmployees = userService.getAllEmployees();
-				model.addAttribute("employees", allEmployees);
-				return new ModelAndView("welcome");
+				/*
+				 * logger.info("Accessing List of all Employees :--- Stating ------>> ");
+				 * List<UserDTO> allEmployees = userService.getAllEmployees();
+				 * model.addAttribute("employees", allEmployees); return new
+				 * ModelAndView("welcome");
+				 */
+				return new ModelAndView("Home");
 			} else {
 				model.addAttribute("errorMsg", "Please enter valid email or password!");
-				return new ModelAndView("home");
+				return new ModelAndView("Login");
 			}
 		} catch (Exception e) {
 			System.out.println("Controller issue !!!!!!!!!!!!!!!!" + e);
-			return new ModelAndView("home");
+			return new ModelAndView("Login");
 		}
 	}
 
@@ -86,7 +158,7 @@ public class UserController {
 	public ModelAndView logout(HttpSession session) {
 		logger.info("Logout user");
 		session.invalidate();
-		return new ModelAndView("home");
+		return new ModelAndView("Login");
 	}
 
 	@GetMapping("/updateUser")
@@ -107,14 +179,22 @@ public class UserController {
 		model.addAttribute("employees", allEmployees);
 		return new ModelAndView("welcome");
 	}
-	
+
 	@GetMapping("/deleteUser")
-	public ModelAndView deleteUser(@ModelAttribute("deleteUser") UserDTO userDTO, Model model)
-	{
-		int delete=userService.deleteUser(userDTO.getEmpId());
+	public ModelAndView deleteUser(@ModelAttribute("deleteUser") UserDTO userDTO, Model model) {
+		int delete = userService.deleteUser(userDTO.getEmpId());
 		List<UserDTO> allEmployees = userService.getAllEmployees();
 		model.addAttribute("employees", allEmployees);
 		return new ModelAndView("welcome");
-		
+
+	}
+
+	@GetMapping("/allUsers")
+	public ModelAndView allusers(Model model) {
+
+		logger.info("Accessing List of all Employees :--- Stating ------>> ");
+		List<UserDTO> allEmployees = userService.getAllEmployees();
+		model.addAttribute("employees", allEmployees);
+		return new ModelAndView("welcome");
 	}
 }
