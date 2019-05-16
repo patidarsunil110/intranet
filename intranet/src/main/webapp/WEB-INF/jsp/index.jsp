@@ -150,7 +150,7 @@ body {
 					<option value="0">--Select Role --</option>
 					<option value="1">Employee</option>
 					<option value="2">Manager</option>
-					<option value="3">Admin </option>
+					<option value="3">Admin</option>
 
 				</select>
 			</div>
