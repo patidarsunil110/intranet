@@ -20,8 +20,12 @@ public interface IUserService {
 
 	public int deleteUser(int i);
 
-	public UserDTO getUserByAttendance(UserDTO userDTO);
+	public UserDTO getUserByAttendance(int i);
 
-	public List<UserDTO> getUserByAttendance();
+	/*public List<UserDTO> getUserByAttendance();*/
+	
+	public List<UserDTO> getTeamList(int emp_id, int manager_id, int team_id);
+
+	public List<UserDTO> getUserByAttendanceEmpId(int empId);
 
 }

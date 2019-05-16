@@ -12,7 +12,7 @@ public class UserDTO {
 	private String password;
 	private String departmentId;
 	private String departmentName;
-	private String managerId;
+	private int managerId;   //changed datatype String to int.
 	private String managerName;
 	private String dateOfJoining;
 	private String roleId;
@@ -23,7 +23,25 @@ public class UserDTO {
 	private String checkIn;
 	private String checkOut;
 	private String status;
+	private int teamId;
+	private String teamName;
 	
+	public int getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -88,11 +106,11 @@ public class UserDTO {
 		this.departmentId = departmentId;
 	}
 
-	public String getManagerId() {
+	public int getManagerId() {
 		return managerId;
 	}
 
-	public void setManagerId(String managerId) {
+	public void setManagerId(int managerId) {
 		this.managerId = managerId;
 	}
 

@@ -16,6 +16,8 @@
 <li><a href="/mobile">Mobile Reimbursement</a></li>
 <li><a href="/addEmployee">Add Employees</a></li>
 <li><a href="/allUsers">Intech Pax List</a></li>
+<li><a href="/teamList">Team List</a></li>
+
 </ul>
 <ul class="nav navbar-nav navbar-right">
 			<li><span class="glyphicon glyphicon-log-in "></span>

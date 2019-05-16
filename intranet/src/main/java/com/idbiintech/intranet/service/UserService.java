@@ -24,6 +24,7 @@ public class UserService implements IUserService {
 		UserDTO validUser = userDao.validUser(userDTO.getEmail());
 		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))
 				&& (validUser.getEmail().equals(userDTO.getEmail()))) {
+			
 			return validUser;
 
 		} else {
@@ -58,15 +59,30 @@ public class UserService implements IUserService {
 		return userDao.deleteUser(i);
 	}
 
-	@Override
-	public UserDTO getUserByAttendance(UserDTO userDTO) {
+/*	@Override
+	public UserDTO getUserByAttendance(int empId) {
 		// TODO Auto-generated method stub
-		return userDao.getUserByAttendance(userDTO);
+		return userDao.getUserByAttendance(empId);
 	}
 
 	@Override
 	public List<UserDTO> getUserByAttendance() {
 		// TODO Auto-generated method stub
 		return userDao.getUserByAttendance();
+	}
+*/
+	@Override
+	public UserDTO getUserByAttendance(int empId) {
+		return userDao.getUserByAttendance(empId);
+	}
+	@Override
+	public List<UserDTO> getTeamList(int emp_id, int manager_id , int team_id) {
+		// TODO Auto-generated method stub
+		return userDao.getTeamList(emp_id,manager_id,team_id);
+	}
+
+	@Override
+	public List<UserDTO> getUserByAttendanceEmpId(int empId) {
+		return userDao.getUserByAttendanceEmpId(empId);
 	}
 }

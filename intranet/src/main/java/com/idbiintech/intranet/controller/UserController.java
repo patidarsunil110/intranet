@@ -25,8 +25,8 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
-
-	UserDTO isValided = null;
+	
+	public UserDTO usersList;
 
 	@GetMapping("/")
 	public ModelAndView index() {
@@ -52,30 +52,7 @@ public class UserController {
 
 	}
 
-	@GetMapping("/attendance")
-	public ModelAndView attendance(@ModelAttribute("attendance") UserDTO userDTO, HttpSession session,
-			HttpServletRequest request, Model model) {
-
-		UserDTO list = userService.getUserByAttendance(userDTO);     //
-		session = request.getSession();
-		try {
-			if (list.getEmpId() == isValided.getEmpId()) {
-				List<UserDTO> attendanceList = userService.getUserByAttendance();
-				model.addAttribute("attendance", attendanceList);
-				return new ModelAndView("Attendance"); 
-			}else {
-				return new ModelAndView("Home");
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-
-			logger.error("Attendance issue " + e);
-			return new ModelAndView("Home");
-		}
-		
-	}
-
+	
 	@GetMapping("/payslips")
 	public ModelAndView payslips() {
 		return new ModelAndView("Payslip");
@@ -122,11 +99,11 @@ public class UserController {
 	@PostMapping("/login")
 	public ModelAndView login(@ModelAttribute("auth") UserDTO userDTO, HttpSession session, HttpServletRequest request,
 			Model model) {
-		isValided = userService.loginUser(userDTO);
+		usersList = userService.loginUser(userDTO);
 		try {
-			if (isValided != null) {
+			if (usersList != null) {
 				session = request.getSession();
-				session.setAttribute("username", isValided.getEmpFirstName() + " " + isValided.getEmpLastName());
+				session.setAttribute("username", usersList.getEmpFirstName() + " " + usersList.getEmpLastName());
 				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
 				/*
 				 * logger.info("Accessing List of all Employees :--- Stating ------>> ");
@@ -144,7 +121,38 @@ public class UserController {
 			return new ModelAndView("Login");
 		}
 	}
+	
+	@GetMapping("/attendance")
+	public ModelAndView attendance(@ModelAttribute("attendance") UserDTO userDTO, HttpSession session,
+			HttpServletRequest request, Model model) {
+		//UserDTO list = userService.getUserByAttendance(userDTO);
+		UserDTO list=userService.getUserByAttendance(usersList.getEmpId());
+		session = request.getSession();
+		try {
+			if (list.getEmpId() == usersList.getEmpId()) {
+				List<UserDTO> attendanceList = userService.getUserByAttendanceEmpId(list.getEmpId());
+				model.addAttribute("attendance", attendanceList);
+				return new ModelAndView("Attendance"); 
+			}else {
+				return new ModelAndView("Home");
+			}
 
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			logger.error("Attendance issue " + e);
+			return new ModelAndView("Home");
+		}
+		
+	}
+	
+	@GetMapping("/teamList")
+	public ModelAndView teamList(Model model) {
+		List<UserDTO> teamList=userService.getTeamList(usersList.getEmpId(),usersList.getManagerId(),usersList.getTeamId());
+		model.addAttribute("team",teamList);
+		return new ModelAndView("Attendance");
+	}
+	
 	@GetMapping("/search")
 	public ModelAndView search(@ModelAttribute("searchParam") String searchParam, Model model) {
 		logger.info("Accessing List By Serach Parameters:-- ");

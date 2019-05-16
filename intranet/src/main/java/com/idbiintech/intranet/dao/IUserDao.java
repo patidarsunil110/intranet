@@ -25,4 +25,10 @@ public interface IUserDao {
 
 	public List<UserDTO> getUserByAttendance();
 
+	public UserDTO getUserByAttendance(int empId);
+
+	public List<UserDTO> getTeamList(int emp_id, int manager_id, int team_id);
+
+	public List<UserDTO> getUserByAttendanceEmpId(int empId);
+
 }

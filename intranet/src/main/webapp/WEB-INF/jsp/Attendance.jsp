@@ -29,6 +29,48 @@
 						<td>${atten.checkIn}</td>
 						<td>${atten.checkOut}</td>
 						<td>${atten.status}</td>
+						<td>${atten.empId}</td>
+						<%-- <td>${user.managerName}</td>
+							<td>${user.dateOfJoining}</td>
+							<td>${user.roleName}</td>
+							<td><form action="get" modelAttribute="updateEmployee ">
+									<a href="updateUser?empId=${user.empId}">Update</a>
+								</form></td>
+							<td><form action="get" modelAttribute="deleteUser ">
+									<a href="deleteUser?empId=${user.empId}">Delete</a>
+								</form></td> --%>
+					</tr>
+				</c:forEach>
+
+			</tbody>
+
+		</table>
+	</div>
+	
+	<p>Team Attendance</p>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Day</th>
+					<th>Date</th>
+					<th>Check In</th>
+					<th>Check Out</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach items="${team}" var="team">
+					<tr>
+						<td>${team.empFirstName}</td>
+						<td>${team.empLastName}</td>
+						<td>${team.dayName}</td>
+						<td>${team.dayDate}</td>
+						<td>${team.checkIn}</td>
+						<td>${team.checkOut}</td>
+						<td>${team.status}</td>
+						<td>${team.roleName}</td>
 						<%-- <td>${user.managerName}</td>
 							<td>${user.dateOfJoining}</td>
 							<td>${user.roleName}</td>

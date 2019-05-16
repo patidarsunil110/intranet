@@ -76,7 +76,7 @@ body {
 			</h1>
 		</div>
 	</c:if> --%>
-	
+
 	<c:if test="${not empty errorMsg }">
 		<div class="text-center well well-large" padding="right 50%">
 			<h1>
@@ -84,13 +84,13 @@ body {
 			</h1>
 		</div>
 	</c:if>
-	
+
 
 
 	<div class="container">
 		<h2>Registration Form</h2>
 		<form id="form" class="form-inline" name="welcome" method="post"
-			action="/signup">
+			action="/addEmployee">
 			<div class="form-group">
 				<input type="text" class="form-control" id="empFirstName"
 					placeholder="Enter Name" name="empFirstName">
@@ -118,21 +118,63 @@ body {
 					placeholder="Enter  Your password" name="password">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="department"
-					placeholder="Enter  department" name="departmentId">
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="manager"
-					placeholder="Enter manager name" name="managerId">
-			</div>
-			<div class="form-group">
 				<input type="text" class="form-control" id="dateOfJoining"
 					placeholder="Enter  Your dob" name="dateOfJoining">
 			</div>
+			<div class="row" style="padding-left: 10px">
 			<div class="form-group">
-				<input type="text" class="form-control" id="roleId"
-					placeholder="Enter  Your Role" name="roleId">
+				<select class="form-control" style="width: 300px;" id="departmentId"
+					name="departmentId">
+					<option value="0">--Select Department --</option>
+					<option value="1">Devlopment</option>
+					<option value="2">Support</option>
+					<option value="3">Tester</option>
+
+				</select>
 			</div>
+			<br>
+			<br>
+			<div class="form-group">
+				<select class="form-control" style="width: 300px;" id="managerId"
+					name="managerId">
+					<option value="0">--Select Manager --</option>
+					<option value="1">Manager 1</option>
+					<option value="2">Manager 2</option>
+					<option value="3">Manager 3</option>
+
+				</select>
+			</div>
+			<div class="form-group">
+				<select class="form-control" style="width: 300px;" id="roleId"
+					name="roleId">
+					<option value="0">--Select Role --</option>
+					<option value="1">Employee</option>
+					<option value="2">Manager</option>
+					<option value="3">Admin</option>
+
+				</select>
+			</div>
+						
+			<div class="form-group">
+				<select class="form-control" style="width: 300px;" id="desgnId"
+					name="desgnId">
+					<option value="0">--Select Designation --</option>
+					<option value="1">Management Trainee</option>
+					<option value="2">Executive</option>
+					<option value="3">Sr. Executive</option>
+					<option value="4">Team Leader</option>
+					<option value="5">Sr. Team Leader</option>
+					<option value="6">Sr. Project Leader</option>
+					<option value="7">Program Manager</option>
+					<option value="8">Administration</option>
+					<option value="9">A. Vice President</option>
+					<option value="10">Vice President</option>
+					<option value="11">CEO</option>
+
+				</select>
+			</div>
+			</div>
+			<br> <br>
 			<button type="submit" class="btn btn-default" onclick="myFunction()">Submit</button>
 		</form>
 	</div>

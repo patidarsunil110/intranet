@@ -51,7 +51,7 @@ public class UserDao implements IUserDao {
 		logger.info("Entering to loginUser() in UserDAO Class :: ");
 		try {
 
-			String sql = " select emp_id as empId, emp_firstname as empFirstName,emp_lastname as empLastName,email,password from employees where email=?";
+			String sql = " select emp_id as empId, emp_firstname as empFirstName,emp_lastname as empLastName,email,password,manager_id,team_id from employees where email=?";
 			lists = jdbcTemplate.query(sql, new Object[] { email }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			logger.error(e);
@@ -149,9 +149,7 @@ public class UserDao implements IUserDao {
 
 		try {
 			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from attendance";
-			lists = jdbcTemplate.query(sql,
-					new Object[] { },
-					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+			lists = jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(" Attendance list issue " + e);
@@ -165,15 +163,73 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public List<UserDTO> getUserByAttendance() {
-		List<UserDTO> listss=null;
+		List<UserDTO> listss = null;
 		try {
-			String sql="select * from attendance";
-			listss=jdbcTemplate.query(sql, new Object[] {},new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
-		}catch (Exception e) {
+			String sql = "select * from attendance";
+			listss = jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
 			// TODO: handle exception
-			logger.error("Error Exception "+e);
+			logger.error("Error Exception " + e);
 		}
-		
+
 		return listss;
+	}
+
+	@Override
+	public UserDTO getUserByAttendance(int empId) {
+		List<UserDTO> listst = null;
+		try {
+			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from attendance where emp_id =?";
+			listst = jdbcTemplate.query(sql, new Object[] { empId }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Check Exception " + e);
+		}
+		if (CollectionUtils.isEmpty(listst)) {
+			return null;
+		} else {
+			return listst.get(0);
+		} /*
+			 * return (UserDTO) listst;
+			 */
+	}
+
+	@Override
+	public List<UserDTO> getTeamList(int emp_id, int manager_id, int team_id) {
+
+		List<UserDTO> teamlist = null;
+		logger.info("Entering getTeamList Method in ManagerDao Class:-- ");
+		try {
+			String sql = "select e.emp_firstname as empFirstName,e.emp_lastname as empLastName,a.day_Name as dayName,a.day_date as dayDate,a.check_in as checkIn,a.check_out as checkOut,a.status ,r.role_name as roleName FROM employees e, team t,attendance a,role r WHERE a.emp_id=e.emp_id and e.role_id=r.role_id and t.team_id=e.team_id and e.emp_id != ? AND e.manager_id !=? and t.team_id=?";
+			teamlist = jdbcTemplate.query(sql, new Object[] { emp_id, manager_id, team_id },
+					new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Get Team List Issue!!!!!!! " + e);
+		}
+		if (CollectionUtils.isEmpty(teamlist)) {
+			return null;
+		} else {
+			return teamlist;
+		}
+	}
+
+	@Override
+	public List<UserDTO> getUserByAttendanceEmpId(int empId) {
+
+		List<UserDTO> listst = null;
+		try {
+			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from attendance where emp_id =?";
+			listst = jdbcTemplate.query(sql, new Object[] { empId }, new BeanPropertyRowMapper<UserDTO>(UserDTO.class));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Check Exception " + e);
+		}
+		if (CollectionUtils.isEmpty(listst)) {
+			return null;
+		} else {
+			return listst;
+		}
+
 	}
 }
