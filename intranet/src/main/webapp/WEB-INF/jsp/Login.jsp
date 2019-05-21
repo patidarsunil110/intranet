@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+ <script type="text/javascript" src="js/validation.js">
+</script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
@@ -91,10 +94,33 @@ h1 {
 					placeholder="Enter Password" name="password">
 			</div>
 			<div>
-				<button type="submit" class="btn btn-default"
+				<button type="button" class="btn btn-default"
 					onclick="submit(this.form);">Login</button>
 			</div>
 		</form>
 	</div>
+	
+	
+<!-- 	<script type="text/javascript">
+	
+	
+	function submit(form) {
+
+		var emails = document.getElementById("emails").value;
+		var pwds = document.getElementById("pwds").value;
+
+		if (emails == "") {
+			alert("Please enter your email")
+		}
+		if (pwds == "") {
+			alert("Please enter your password")
+		}
+		form.action=document.getElementById("applicationContext").value + '/login';
+		form.target="_self";
+		form.method="post";
+		form.submit(form);
+	}
+	
+	</script> -->
 </body>
 </html>

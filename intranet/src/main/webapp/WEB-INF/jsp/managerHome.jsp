@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
- <!-- <script type="text/javascript" src="js/validation.js">
-</script> -->
 	<style>
 body {
 	font-family: "Lato", sans-serif;
@@ -19,10 +16,11 @@ body {
 
 .sidenav {
 	height: 100%;
-	width: 230px;
+	width: 200px;
 	position: fixed;
 	z-index: 1;
 	top: 52px;
+	bottom:12px;
 	left: 0;
 	background-color: #111;
 	overflow-x: hidden;
@@ -42,7 +40,7 @@ body {
 }
 
 .main {
-	margin-left: 240px; /* Same as the width of the sidenav */
+	margin-left: 200px; /* Same as the width of the sidenav */
 	font-size: 25px; /* Increased text to enable scrolling */
 	padding: 0px 10px;
 }
@@ -73,7 +71,9 @@ body {
   
 <div class="container">
 	<div class="sidenav">
-			<a href="/home">Home</a> 
+			<a href="/home">Home</a>
+			<a href="/allUsers">Intech Pax List</a>
+			<a href="/teamList">Team List</a>
 			<a href="/leavebal">My Leave Balance</a> 
 			<a href="/leaveapply">Apply Leave</a> 
 			<a href="/attendance" name="attendance">Attendance</a>
@@ -81,29 +81,20 @@ body {
 			<a href="/tax">Tax Estimate</a> 
 			<a href="/vehicle">Vehicle Reimbursement</a> 
 			<a	href="/mobile">Mobile Reimbursement</a> 
-	<!-- 		<a href="/addEmployee">Add Employees</a> 
-			<a href="/allUsers">Intech Pax List</a>
-			 <a href="/teamList">Team List</a> -->
-
+	 		<!-- <a href="/addEmployee">Add Employees</a> 
+			<a href="/deleteEmployee">Delete Employees</a>
+			<a href="/updateEmployee">Update Employees</a>
+			<a href="/addPayslips">Add Payslips</a> -->
+			<a href="/attendanceReview">Attendance Application</a>
+			<a href="/mobileReview">Mobile Application</a>
+			<a href="/vehicleReview">Vehicle Application</a>
+			<!-- <a href="/documentsView">Add Documents Detail</a>
+			<a href="/documentsAdd">Add Documents Detail</a> -->
 	</div>
 	
 </div>
 <div class="main">
-	<div class="row">
-    <div class="col-sm-3" style="background-color:yellow;">
-     Previous Day Working Hours
-    </div>
-    <div class="col-sm-3" style="background-color:pink;">
-     Total Leave Balance
-    </div>
-    <div class="col-sm-3" style="background-color:yellow;">
-	Current Present Day
-    </div>
-    <div class="col-sm-3" style="background-color:pink;">
-    Check-in Time  
-    </div>
-  </div>
-	
+HelloHome Page
 </div>
 </body>
 </html>

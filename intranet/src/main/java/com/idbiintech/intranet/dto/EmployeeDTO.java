@@ -3,7 +3,7 @@ package com.idbiintech.intranet.dto;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class EmployeeDTO {
 	private int empId;
 	private String empFirstName;
 	private String empLastName;
@@ -25,7 +25,25 @@ public class UserDTO {
 	private String status;
 	private int teamId;
 	private String teamName;
+	private int desgnId;
+	private String totalHours;
 	
+	public String getTotalHours() {
+		return totalHours;
+	}
+
+	public void setTotalHours(String totalHours) {
+		this.totalHours = totalHours;
+	}
+
+	public int getDesgnId() {
+		return desgnId;
+	}
+
+	public void setDesgnId(int desgnId) {
+		this.desgnId = desgnId;
+	}
+
 	public int getTeamId() {
 		return teamId;
 	}

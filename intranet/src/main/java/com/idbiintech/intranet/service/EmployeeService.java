@@ -5,23 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.idbiintech.intranet.dao.IUserDao;
-import com.idbiintech.intranet.dto.UserDTO;
+import com.idbiintech.intranet.dao.IEmployeeDao;
+import com.idbiintech.intranet.dto.EmployeeDTO;
 
 @Service
-public class UserService implements IUserService {
+public class EmployeeService implements IEmployeeService {
 
 	@Autowired
-	private IUserDao userDao;
+	private IEmployeeDao userDao;
 
 	@Override
-	public int saveEmployee(UserDTO userDTO) {
+	public int saveEmployee(EmployeeDTO userDTO) {
 		return userDao.saveEmployee(userDTO);
 	}
 
 	@Override
-	public UserDTO loginUser(UserDTO userDTO) {
-		UserDTO validUser = userDao.validUser(userDTO.getEmail());
+	public EmployeeDTO loginUser(EmployeeDTO userDTO) {
+		EmployeeDTO validUser = userDao.validUser(userDTO.getEmail());
 		if (validUser != null && (validUser.getPassword().equals(userDTO.getPassword()))
 				&& (validUser.getEmail().equals(userDTO.getEmail()))) {
 			
@@ -34,23 +34,23 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List<UserDTO> getAllEmployees() {
+	public List<EmployeeDTO> getAllEmployees() {
 
 		return userDao.getAllEmployees();
 	}
 
 	@Override
-	public List<UserDTO> getUserById(String searchParam) {
+	public List<EmployeeDTO> getUserById(String searchParam) {
 		return userDao.getUserById(searchParam);
 	}
 
 	@Override
-	public int updateEmployee(UserDTO userDTO) {
+	public int updateEmployee(EmployeeDTO userDTO) {
 		return userDao.updateEmployee(userDTO);
 	}
 
 	@Override
-	public List<UserDTO> getUserByIdForUpdate(int empId) {
+	public List<EmployeeDTO> getUserByIdForUpdate(int empId) {
 		return userDao.getUserByIdForUpdate(empId);
 	}
 
@@ -72,17 +72,17 @@ public class UserService implements IUserService {
 	}
 */
 	@Override
-	public UserDTO getUserByAttendance(int empId) {
+	public EmployeeDTO getUserByAttendance(int empId) {
 		return userDao.getUserByAttendance(empId);
 	}
 	@Override
-	public List<UserDTO> getTeamList(int emp_id, int manager_id , int team_id) {
+	public List<EmployeeDTO> getTeamList(int emp_id, int manager_id , int team_id) {
 		// TODO Auto-generated method stub
 		return userDao.getTeamList(emp_id,manager_id,team_id);
 	}
 
 	@Override
-	public List<UserDTO> getUserByAttendanceEmpId(int empId) {
+	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId) {
 		return userDao.getUserByAttendanceEmpId(empId);
 	}
 }

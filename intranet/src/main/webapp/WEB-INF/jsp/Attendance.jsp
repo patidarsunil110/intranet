@@ -6,6 +6,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Daily Attendance</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -18,6 +23,7 @@
 					<th>Check In</th>
 					<th>Check Out</th>
 					<th>Status</th>
+					<th>Total hours</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,16 +35,7 @@
 						<td>${atten.checkIn}</td>
 						<td>${atten.checkOut}</td>
 						<td>${atten.status}</td>
-						<td>${atten.empId}</td>
-						<%-- <td>${user.managerName}</td>
-							<td>${user.dateOfJoining}</td>
-							<td>${user.roleName}</td>
-							<td><form action="get" modelAttribute="updateEmployee ">
-									<a href="updateUser?empId=${user.empId}">Update</a>
-								</form></td>
-							<td><form action="get" modelAttribute="deleteUser ">
-									<a href="deleteUser?empId=${user.empId}">Delete</a>
-								</form></td> --%>
+						<td>${atten.totalHours}</td>
 					</tr>
 				</c:forEach>
 
@@ -47,45 +44,5 @@
 		</table>
 	</div>
 	
-	<p>Team Attendance</p>
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Day</th>
-					<th>Date</th>
-					<th>Check In</th>
-					<th>Check Out</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<c:forEach items="${team}" var="team">
-					<tr>
-						<td>${team.empFirstName}</td>
-						<td>${team.empLastName}</td>
-						<td>${team.dayName}</td>
-						<td>${team.dayDate}</td>
-						<td>${team.checkIn}</td>
-						<td>${team.checkOut}</td>
-						<td>${team.status}</td>
-						<td>${team.roleName}</td>
-						<%-- <td>${user.managerName}</td>
-							<td>${user.dateOfJoining}</td>
-							<td>${user.roleName}</td>
-							<td><form action="get" modelAttribute="updateEmployee ">
-									<a href="updateUser?empId=${user.empId}">Update</a>
-								</form></td>
-							<td><form action="get" modelAttribute="deleteUser ">
-									<a href="deleteUser?empId=${user.empId}">Delete</a>
-								</form></td> --%>
-					</tr>
-				</c:forEach>
-
-			</tbody>
-
-		</table>
-	</div>
 </body>
 </html>
