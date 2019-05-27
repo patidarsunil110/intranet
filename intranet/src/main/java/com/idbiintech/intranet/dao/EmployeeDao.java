@@ -149,7 +149,7 @@ public class EmployeeDao implements IEmployeeDao {
 		List<EmployeeDTO> lists = null;
 
 		try {
-			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from attendance";
+			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId from todayattendance";
 			lists = jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -166,7 +166,7 @@ public class EmployeeDao implements IEmployeeDao {
 	public List<EmployeeDTO> getUserByAttendance() {
 		List<EmployeeDTO> listss = null;
 		try {
-			String sql = "select * from attendance";
+			String sql = "select * from todayattendance";
 			listss = jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -181,7 +181,7 @@ public class EmployeeDao implements IEmployeeDao {
 		List<EmployeeDTO> listst = null;
 		try {
 			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,"
-					+ "check_out as checkOut,status,emp_id as empId,total_hours as totalHours from attendance where emp_id =?";
+					+ "check_out as checkOut,status,emp_id as empId,total_hours as totalHours from todayattendance where emp_id =?";
 			listst = jdbcTemplate.query(sql, new Object[] { empId }, new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -202,7 +202,7 @@ public class EmployeeDao implements IEmployeeDao {
 		List<EmployeeDTO> teamlist = null;
 		logger.info("Entering getTeamList Method in ManagerDao Class:-- ");
 		try {
-			String sql = "select e.emp_firstname as empFirstName,e.emp_lastname as empLastName,a.day_Name as dayName,a.day_date as dayDate,a.check_in as checkIn,a.check_out as checkOut,a.status ,r.role_name as roleName FROM employees e, team t,attendance a,role r WHERE a.emp_id=e.emp_id and e.role_id=r.role_id and t.team_id=e.team_id and e.emp_id != ? AND e.manager_id !=? and t.team_id=?";
+			String sql = "select e.emp_firstname as empFirstName,e.emp_lastname as empLastName,a.day_Name as dayName,a.day_date as dayDate,a.check_in as checkIn,a.check_out as checkOut,a.status ,r.role_name as roleName FROM employees e, team t,todayattendance a,role r WHERE a.emp_id=e.emp_id and e.role_id=r.role_id and t.team_id=e.team_id and e.emp_id != ? AND e.manager_id !=? and t.team_id=?";
 			teamlist = jdbcTemplate.query(sql, new Object[] { emp_id, manager_id, team_id },
 					new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
@@ -221,12 +221,13 @@ public class EmployeeDao implements IEmployeeDao {
 
 		List<EmployeeDTO> listst = null;
 		try {
-			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId,total_hours as totalHours from attendance where emp_id =?";
+			String sql = "select day_name as dayName,day_date as dayDate,check_in as checkIn,check_out as checkOut,status,emp_id as empId,total_hours as totalHours from todayattendance where emp_id =?";
 			listst = jdbcTemplate.query(sql, new Object[] { empId }, new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error("Check Exception " + e);
 		}
+		
 		if (CollectionUtils.isEmpty(listst)) {
 			return null;
 		} else {

@@ -23,13 +23,13 @@ import com.idbiintech.intranet.service.IEmployeeService;
 @Controller
 public class EmployeeController {
 	private static final Logger logger = LogManager.getLogger(EmployeeController.class);
-	
-	@Value("${server.context-path}")
-	private String applicationContext;
+	/*
+	@Value("${servlet.context-path}")
+	private String applicationContext;*/
 
 	
 	@Autowired
-	IEmployeeService userService;
+	public IEmployeeService userService;
 	
 	public EmployeeDTO usersList;
 
@@ -114,6 +114,7 @@ public class EmployeeController {
 				session.setAttribute("username", usersList.getEmpFirstName() + " " + usersList.getEmpLastName());
 				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
 				 if(role.equalsIgnoreCase("Employees")){
+					 model.addAttribute("empId",usersList.getEmpId()); 
 					return new ModelAndView("Home");
 				}
 				else if(role.equalsIgnoreCase("Manager")) {
@@ -133,7 +134,7 @@ public class EmployeeController {
 		return new ModelAndView("Login");
 	}
 	
-	@GetMapping("/attendance")
+	/*@GetMapping("/attendance")
 	public ModelAndView attendance(@ModelAttribute("attendance") EmployeeDTO userDTO, HttpSession session,
 			HttpServletRequest request, Model model) {
 		//UserDTO list = userService.getUserByAttendance(userDTO);
@@ -163,7 +164,7 @@ public class EmployeeController {
 		model.addAttribute("team",teamList);
 		return new ModelAndView("Attendance");
 	}
-	
+	*/
 	@GetMapping("/search")
 	public ModelAndView search(@ModelAttribute("searchParam") String searchParam, Model model) {
 		logger.info("Accessing List By Serach Parameters:-- ");
