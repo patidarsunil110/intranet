@@ -59,19 +59,7 @@ public class EmployeeService implements IEmployeeService {
 		return userDao.deleteUser(i);
 	}
 
-/*	@Override
-	public UserDTO getUserByAttendance(int empId) {
-		// TODO Auto-generated method stub
-		return userDao.getUserByAttendance(empId);
-	}
-
-	@Override
-	public List<UserDTO> getUserByAttendance() {
-		// TODO Auto-generated method stub
-		return userDao.getUserByAttendance();
-	}
-*/
-	@Override
+	/*@Override
 	public EmployeeDTO getUserByAttendance(int empId) {
 		return userDao.getUserByAttendance(empId);
 	}
@@ -84,5 +72,5 @@ public class EmployeeService implements IEmployeeService {
 	@Override
 	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId) {
 		return userDao.getUserByAttendanceEmpId(empId);
-	}
+	}*/
 }

@@ -20,12 +20,12 @@ public interface IEmployeeService {
 
 	public int deleteUser(int i);
 
-	public EmployeeDTO getUserByAttendance(int i);
+/*	public EmployeeDTO getUserByAttendance(int i);
 
-	/*public List<UserDTO> getUserByAttendance();*/
+	//public List<UserDTO> getUserByAttendance();
 	
 	public List<EmployeeDTO> getTeamList(int emp_id, int manager_id, int team_id);
 
-	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId);
+	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId);*/
 
 }

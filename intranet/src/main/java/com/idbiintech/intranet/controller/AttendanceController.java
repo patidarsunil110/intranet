@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.idbiintech.intranet.dto.EmployeeDTO;
 import com.idbiintech.intranet.service.IAttendanceService;
-import com.idbiintech.intranet.service.IEmployeeService;
 
 @Controller
 public class AttendanceController {
@@ -24,17 +23,16 @@ public class AttendanceController {
 	
 	private static final Logger logger = LogManager.getLogger(AttendanceController.class);
 	@Autowired
-	IEmployeeService  attendanceService;
-	
-	EmployeeDTO usersList;
+	public IAttendanceService  attendanceService;
+
 	@GetMapping("/attendance")
 	public ModelAndView attendance(@ModelAttribute("attendance") EmployeeDTO userDTO, HttpSession session,
 			HttpServletRequest request, Model model) {
 		//UserDTO list = attendanceService.getUserByAttendance(userDTO);
-		EmployeeDTO list=attendanceService.getUserByAttendance(usersList.getEmpId());
+		EmployeeDTO list=attendanceService.getUserByAttendance(EmployeeDTO.usersList.getEmpId());
 		session = request.getSession();
 		try {
-			if (list.getEmpId() == usersList.getEmpId()) {
+			if (list.getEmpId() == EmployeeDTO.usersList.getEmpId()) {
 				List<EmployeeDTO> attendanceList = attendanceService.getUserByAttendanceEmpId(list.getEmpId());
 				model.addAttribute("attendance", attendanceList);
 				return new ModelAndView("Attendance"); 
@@ -53,7 +51,7 @@ public class AttendanceController {
 	
 	@GetMapping("/teamList")
 	public ModelAndView teamList(Model model) {
-		List<EmployeeDTO> teamList=attendanceService.getTeamList(usersList.getEmpId(),usersList.getManagerId(),usersList.getTeamId());
+		List<EmployeeDTO> teamList=attendanceService.getTeamList(EmployeeDTO.usersList.getEmpId(),EmployeeDTO.usersList.getManagerId(),EmployeeDTO.usersList.getTeamId());
 		model.addAttribute("team",teamList);
 		return new ModelAndView("Attendance");
 	}

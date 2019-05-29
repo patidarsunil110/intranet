@@ -25,10 +25,10 @@ public interface IEmployeeDao {
 
 	public List<EmployeeDTO> getUserByAttendance();
 
-	public EmployeeDTO getUserByAttendance(int empId);
+/*	public EmployeeDTO getUserByAttendance(int empId);
 
 	public List<EmployeeDTO> getTeamList(int emp_id, int manager_id, int team_id);
 
-	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId);
+	public List<EmployeeDTO> getUserByAttendanceEmpId(int empId);*/
 
 }

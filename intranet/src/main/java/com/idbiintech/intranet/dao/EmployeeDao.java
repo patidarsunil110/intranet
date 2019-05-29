@@ -176,7 +176,7 @@ public class EmployeeDao implements IEmployeeDao {
 		return listss;
 	}
 
-	@Override
+/*	@Override
 	public EmployeeDTO getUserByAttendance(int empId) {
 		List<EmployeeDTO> listst = null;
 		try {
@@ -191,9 +191,9 @@ public class EmployeeDao implements IEmployeeDao {
 			return null;
 		} else {
 			return listst.get(0);
-		} /*
+		} 
 			 * return (UserDTO) listst;
-			 */
+			 
 	}
 
 	@Override
@@ -234,5 +234,5 @@ public class EmployeeDao implements IEmployeeDao {
 			return listst;
 		}
 
-	}
+	}*/
 }

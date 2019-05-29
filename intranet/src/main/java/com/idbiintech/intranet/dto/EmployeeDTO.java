@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EmployeeDTO {
+	public static EmployeeDTO usersList;
 	private int empId;
 	private String empFirstName;
 	private String empLastName;

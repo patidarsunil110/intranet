@@ -31,7 +31,6 @@ public class EmployeeController {
 	@Autowired
 	public IEmployeeService userService;
 	
-	public EmployeeDTO usersList;
 
 	//First page of application.
 	@GetMapping("/")
@@ -106,15 +105,15 @@ public class EmployeeController {
 	public ModelAndView login(@ModelAttribute("auth") EmployeeDTO userDTO, HttpSession session, HttpServletRequest request,
 			Model model) {
 		try {
-		usersList = userService.loginUser(userDTO);
-		String role=usersList.getRoleName();
+		EmployeeDTO.usersList = userService.loginUser(userDTO);
+		String role=EmployeeDTO.usersList.getRoleName();
 		
-			if (usersList != null) {
+			if (EmployeeDTO.usersList != null) {
 				session = request.getSession();
-				session.setAttribute("username", usersList.getEmpFirstName() + " " + usersList.getEmpLastName());
+				session.setAttribute("username", EmployeeDTO.usersList.getEmpFirstName() + " " + EmployeeDTO.usersList.getEmpLastName());
 				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
 				 if(role.equalsIgnoreCase("Employees")){
-					 model.addAttribute("empId",usersList.getEmpId()); 
+					 model.addAttribute("empId",EmployeeDTO.usersList.getEmpId()); 
 					return new ModelAndView("Home");
 				}
 				else if(role.equalsIgnoreCase("Manager")) {
