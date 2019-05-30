@@ -23,15 +23,15 @@ import com.idbiintech.intranet.service.IEmployeeService;
 @Controller
 public class EmployeeController {
 	private static final Logger logger = LogManager.getLogger(EmployeeController.class);
-	/*
-	@Value("${servlet.context-path}")
-	private String applicationContext;*/
+	
+	@Value("${server.servlet.context-path}")
+	private String applicationContext;
 
 	
 	@Autowired
 	public IEmployeeService userService;
 	
-
+	EmployeeDTO usersList;
 	//First page of application.
 	@GetMapping("/")
 	public ModelAndView index() {
@@ -105,15 +105,15 @@ public class EmployeeController {
 	public ModelAndView login(@ModelAttribute("auth") EmployeeDTO userDTO, HttpSession session, HttpServletRequest request,
 			Model model) {
 		try {
-		EmployeeDTO.usersList = userService.loginUser(userDTO);
-		String role=EmployeeDTO.usersList.getRoleName();
+		usersList = userService.loginUser(userDTO);
+		String role=usersList.getRoleName();
 		
-			if (EmployeeDTO.usersList != null) {
+			if (usersList != null) {
 				session = request.getSession();
-				session.setAttribute("username", EmployeeDTO.usersList.getEmpFirstName() + " " + EmployeeDTO.usersList.getEmpLastName());
+				session.setAttribute("username", usersList.getEmpFirstName() + " " + usersList.getEmpLastName());
 				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
 				 if(role.equalsIgnoreCase("Employees")){
-					 model.addAttribute("empId",EmployeeDTO.usersList.getEmpId()); 
+					 model.addAttribute("empId",usersList.getEmpId()); 
 					return new ModelAndView("Home");
 				}
 				else if(role.equalsIgnoreCase("Manager")) {

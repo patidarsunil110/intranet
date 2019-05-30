@@ -70,13 +70,16 @@ body {
     </ul>
   </div>
 </nav>
-  
+  <form modelAttribute="attendence" class="form-horizontal"
+role="form">
+
 <div class="container">
 	<div class="sidenav">
 			<a href="/home">Home</a> 
 			<a href="/leavebal">My Leave Balance</a> 
 			<a href="/leaveapply">Apply Leave</a> 
-			<a href="/attendance" name="attendance">Attendance</a>
+			<!-- <a onclick='myFunction(this.form)' name="attendance">Attendance</a> -->
+			<button onclick="myFunction(this.form);"> Click Me</button>
 			<a href="/payslips">Individual Payslip</a> 
 			<a href="/tax">Tax Estimate</a> 
 			<a href="/vehicle">Vehicle Reimbursement</a> 
@@ -103,7 +106,23 @@ body {
     Check-in Time  
     </div>
   </div>
-	
-</div>
+  
+	<input type="hidden" id="empId" name="empId" value=${empId} >
+	</div>
+		<input type="hidden" id="applicationContext" value="${pageContext.servletContext.contextPath}" >
+	</form>
 </body>
 </html>
+
+<script>
+
+function myFunction(form) {
+	var empId = document.getElementById("empId").value;
+	alert("Inside function");
+	form.action=document.getElementById("applicationContext").value + 'attendance?empId'+empId;
+	form.target="_self";
+	form.method="post";
+	form.submit(form);
+
+	}
+</script>
