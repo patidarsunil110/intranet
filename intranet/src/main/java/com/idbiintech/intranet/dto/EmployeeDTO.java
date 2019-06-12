@@ -27,7 +27,27 @@ public class EmployeeDTO {
 	private String teamName;
 	private int desgnId;
 	private String totalHours;
+	private int presentDays;
+	private int totalLeave;
 	
+	
+	
+	public int getPresentDays() {
+		return presentDays;
+	}
+
+	public void setPresentDays(int presentDays) {
+		this.presentDays = presentDays;
+	}
+
+	public int getTotalLeave() {
+		return totalLeave;
+	}
+
+	public void setTotalLeave(int totalLeave) {
+		this.totalLeave = totalLeave;
+	}
+
 	public String getTotalHours() {
 		return totalHours;
 	}

@@ -111,9 +111,12 @@ public class EmployeeController {
 			if (usersList != null) {
 				session = request.getSession();
 				session.setAttribute("username", usersList.getEmpFirstName() + " " + usersList.getEmpLastName());
-				model.addAttribute("msg", "Welcome....You Are Logged Successfully");
+				/*model.addAttribute("msg", "Welcome....You Are Logged Successfully");*/
 				 if(role.equalsIgnoreCase("Employees")){
-					 model.addAttribute("empId",usersList.getEmpId()); 
+					 //date 080619  model.addAttribute("empId",usersList.getEmpId()); 
+					 session.setAttribute("totalHours",usersList.getTotalHours());
+					 session.setAttribute("checkIn",usersList.getCheckIn());
+					// model.addAttribute("homePages", usersList);
 					return new ModelAndView("Home");
 				}
 				else if(role.equalsIgnoreCase("Manager")) {

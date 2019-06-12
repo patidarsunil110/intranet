@@ -51,8 +51,15 @@ public class EmployeeDao implements IEmployeeDao {
 		logger.info("Entering to loginUser() in UserDAO Class :: ");
 		try {
 
-			String sql = " select emp_id as empId, emp_firstname as empFirstName,emp_lastname as empLastName,email,password,manager_id,"
-					+ "team_id,r.role_name as roleName,desgn_id as desgnId from employees e left join role r on e.role_id=r.role_id where email=?";
+			String sql = " select e.emp_id as empId, e.emp_firstname as empFirstName,\r\n" + 
+					"					emp_lastname as empLastName,email,password,e.manager_id, \r\n" + 
+					"					team_id,r.role_name as roleName,desgn_id as desgnId,t.check_in as checkIn,\r\n" + 
+					"					t.day_name as dayName, t.day_date as dayDate,\r\n" + 
+					"                    (select t.total_hours as totalHours\r\n" + 
+					"       from todayattendance t where t.day_date=ADDDATE('2019-04-04',INTERVAL -1 DAY)) as totalHours\r\n" + 
+					"					 from employees e left join role r on e.role_id=r.role_id\r\n" + 
+					"					left join todayattendance t on e.emp_id=t.emp_id \r\n" + 
+					"		where e.email=? and t.day_date ='2019-04-04'";
 			lists = jdbcTemplate.query(sql, new Object[] { email }, new BeanPropertyRowMapper<EmployeeDTO>(EmployeeDTO.class));
 		} catch (Exception e) {
 			logger.error(e);

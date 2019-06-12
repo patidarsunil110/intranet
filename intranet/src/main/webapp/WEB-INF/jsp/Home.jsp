@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,9 +43,10 @@ body {
 }
 
 .main {
-	margin-left: 240px; /* Same as the width of the sidenav */
+	margin-left: 235px; /* Same as the width of the sidenav */
 	font-size: 25px; /* Increased text to enable scrolling */
 	padding: 0px 10px;
+	margin-right:5px; 
 }
 
 @media screen and (max-height: 450px) {
@@ -93,23 +95,44 @@ role="form">
 </div>
 <div class="main">
 	<div class="row">
-    <div class="col-sm-3" style="background-color:yellow;">
-     Previous Day Working Hours
-    </div>
-    <div class="col-sm-3" style="background-color:pink;">
-     Total Leave Balance
-    </div>
-    <div class="col-sm-3" style="background-color:yellow;">
-	Current Present Day
-    </div>
-    <div class="col-sm-3" style="background-color:pink;">
-    Check-in Time  
-    </div>
+	
+	<%-- <p>Total Hours(Previous Day)<%=session.getAttribute("totalHours")%></p>
+	<p>Check In (Today)<%=session.getAttribute("checkIn")%></p>
+	 --%>
+	 <div class="col-sm-3" style="background-color:lavender;">Total Hours(Previous Day)<%=session.getAttribute("totalHours")%></div>
+    <div class="col-sm-3" style="background-color:lavender;">Check In (Today)<%=session.getAttribute("checkIn")%></div>
+	<%-- <div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th> Total Hours(Previous Day)</th>
+    				<!-- <th>  Present Days(Current Month)</th> 
+    				<th>  Total Leave(Casual Leave)</th>-->
+    				<th>  Check-in (Today) </th> 
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach items="${homePages}" var="homes">
+					<tr>
+						<td>${homes.totalHours}</td>
+						<td>${homes.checkIn}</td>
+					</tr>
+				</c:forEach>
+
+			</tbody>
+
+		</table>
+		
+	</div>
+	 --%>
+
   </div>
   
-	<input type="hidden" id="empId" name="empId" value=${empId} >
-	</div>
-		<input type="hidden" id="applicationContext" value="${pageContext.servletContext.contextPath}" >
+  </div>
+	<%-- <input type="hidden" id="empId" name="empId" value=${empId} >
+	
+		<input type="hidden" id="applicationContext" value="${pageContext.servletContext.contextPath}" > --%>
 	</form>
 </body>
 </html>

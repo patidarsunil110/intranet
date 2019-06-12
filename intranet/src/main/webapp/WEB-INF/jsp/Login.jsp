@@ -17,7 +17,8 @@ body {
 }
 
 .container {
-	width: 300px;
+	width: 320px;
+	height: 280px;
 	padding: 40;
 	position: absolute;
 	top: 50%;
@@ -48,6 +49,22 @@ body {
 	border-radius: 24px;
 	transition: 0.25s;
 }
+body, html {
+  height: 100%;
+}
+
+.bg { 
+  /* The image used */
+  background-image: url("images/login-bg.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .container input[type="text"]:focus, .container input[type="password"]:focus,
 	.container input[type="email"]:focus {
@@ -66,11 +83,27 @@ h1 {
 	text-transform: inherit;
 	font-weight: 500;
 }
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14 px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button4 {border-radius: 12px;}
 </style>
 
 </head>
 
 <body>
+<div class="bg"></div>
+
 	<c:if test="${not empty errorMsg }">
 <div class="text-center well well-lg">
 <h1><font color="red">${errorMsg}</font></h1>
@@ -78,11 +111,10 @@ h1 {
 </c:if>
 
 	<div class="container">
-		<marquee font color="blue">
-			<h1>Welcome To Intranet Project</h1>
-		</marquee>
+		<div class="m" style="color:blue">
+			<h1>Intech People</h1>
+		</div>
 
-		<h2>Login Form</h2>
 		<form class="form-inline" name="auth" method="post" action="/login">
 			<div class="form-group">
 				<input type="text" class="form-control" id="email"
@@ -94,8 +126,10 @@ h1 {
 					placeholder="Enter Password" name="password">
 			</div>
 			<div>
-				<button type="button" class="btn btn-default"
+				<button type="button" class="button button4"
 					onclick="submit(this.form);">Login</button>
+					<button type="reset" class="button button4">
+					Reset</button>
 			</div>
 		</form>
 	</div>
